@@ -2,22 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Post;
+use App\Models\Foo;
 use Illuminate\Http\Request;
 
-class PostController extends Controller
+class FooController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        // Get all the posts ordered by published date
-        $posts = Post::orderBy('published_at', 'desc')->get();
-
-        return view('posts.index', compact('posts'));
+        $foos = Foo::paginate(15)->withQueryString();
+        return view('foos.index', compact('foos'));
     }
 
     /**
@@ -27,7 +24,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('posts.create');
+        //
     }
 
     /**
@@ -44,21 +41,21 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Post  $post
+     * @param  \App\Models\Foo  $foo
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show(Foo $foo)
     {
-        return view('posts.show', compact('post'));
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Post  $post
+     * @param  \App\Models\Foo  $foo
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    public function edit(Foo $foo)
     {
         //
     }
@@ -67,10 +64,10 @@ class PostController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Post  $post
+     * @param  \App\Models\Foo  $foo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(Request $request, Foo $foo)
     {
         //
     }
@@ -78,11 +75,20 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Post  $post
+     * @param  \App\Models\Foo  $foo
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy(Foo $foo)
     {
         //
+    }
+
+    private function validateFoo(Request $request)
+    {
+        return $request->validate([
+            'name' => 'required',
+            'thud' => 'required|integer|between:5,732',
+            'wombat' => 'required'
+        ]);
     }
 }
