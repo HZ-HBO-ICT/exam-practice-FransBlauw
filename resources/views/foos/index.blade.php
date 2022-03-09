@@ -32,14 +32,16 @@
                                                         <strong>{{ $foo->name }}</strong>
                                                         <small>{{ $foo->updated_at }}</small>
                                                         <br>
-                                                        <strong>Wombat - </strong>{{ $foo->wombat }}<br/>
-                                                        <strong>Thud - </strong>{{ $foo->thud }}<br/>
-                                                        <strong>Kazaam - </strong>{{ $foo->kazaam }}
+                                                        <strong>Wombat: </strong>{{ $foo->wombat }}<br/>
+                                                        <strong>Thud: </strong>{{ $foo->thud }}<br/>
+                                                        <strong>Kazaam: </strong>{{ $foo->kazaam }}<br/>
+
                                                     </p>
                                                 </div>
                                             </div>
                                         </article>
                                     </a>
+                                    <a href="{{ route('foos.edit',$foo) }}">Edit</a>
                                 </div>
                             @endforeach
                             {{$foos->links()}}

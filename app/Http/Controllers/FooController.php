@@ -13,7 +13,7 @@ class FooController extends Controller
      */
     public function index()
     {
-        $foos = Foo::paginate(15)->withQueryString();
+        $foos = Foo::orderBy('updated_at','desc')->paginate(15)->withQueryString();
         return view('foos.index', compact('foos'));
     }
 
@@ -24,7 +24,7 @@ class FooController extends Controller
      */
     public function create()
     {
-        //
+        return view('foos.create');
     }
 
     /**
@@ -35,7 +35,8 @@ class FooController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $foo = Foo::create($this->validateFoo($request));
+        return redirect(route('foos.show',$foo));
     }
 
     /**
@@ -46,7 +47,7 @@ class FooController extends Controller
      */
     public function show(Foo $foo)
     {
-        //
+        return view('foos.show', compact('foo'));
     }
 
     /**
@@ -57,7 +58,7 @@ class FooController extends Controller
      */
     public function edit(Foo $foo)
     {
-        //
+        return view('foos.edit',compact('foo'));
     }
 
     /**
@@ -69,7 +70,8 @@ class FooController extends Controller
      */
     public function update(Request $request, Foo $foo)
     {
-        //
+        $foo->update($this->validateFoo($request));
+        return redirect(route('foos.show',$foo));
     }
 
     /**
@@ -80,15 +82,16 @@ class FooController extends Controller
      */
     public function destroy(Foo $foo)
     {
-        //
+        $foo->delete();
+        return redirect(route('foos.index'));
     }
 
     private function validateFoo(Request $request)
     {
         return $request->validate([
             'name' => 'required',
-            'thud' => 'required|integer|between:5,732',
-            'wombat' => 'required'
+            'thud' => 'required|integer|min:0',
+            'wombat' => 'required|boolean'
         ]);
     }
 }
