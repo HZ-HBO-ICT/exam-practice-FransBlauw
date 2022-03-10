@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Foo;
 use Illuminate\Database\Seeder;
 
 class PostSeeder extends Seeder
@@ -13,7 +14,8 @@ class PostSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
-        \App\Models\Post::factory(15)->create();
+        \App\Models\Post::factory(15)
+            ->has(Foo::factory(3), 'foos')
+            ->create();
     }
 }
