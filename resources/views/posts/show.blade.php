@@ -21,6 +21,14 @@
                         <p>Published at: {{ $post->published_at }}</p>
 
                         {!! $post->body !!}
+
+                        <strong>Foos:</strong>
+                        @foreach($post->foos as $foo)
+                            <ul>
+                                <li>{{ $foo->name }}</li>
+                                <li>{{ $foo->thud }}</li>
+                            </ul>
+                        @endforeach
                     </div>
 
                 </div>
