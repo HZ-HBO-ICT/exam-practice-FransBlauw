@@ -19,7 +19,11 @@
 
                     <div class="content">
                         <p>Published at: {{ $post->published_at }}</p>
-
+                        <h2>Foo Details</h2>
+                        @foreach($post->foos as $foo)
+                            <p>Foo Name: {{ $foo->name }}<br/>
+                            Foo Kasaam {{ $foo->kazaam }}</p>
+                        @endforeach
                         {!! $post->body !!}
                     </div>
 

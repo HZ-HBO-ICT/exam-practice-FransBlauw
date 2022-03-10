@@ -9,4 +9,7 @@ class Post extends Model
 {
     use HasFactory;
     //
+    public function foos() {
+        return $this->hasMany(Foo::class,'skwal');
+    }
 }

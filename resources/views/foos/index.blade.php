@@ -35,6 +35,7 @@
                                                         <strong>Wombat: </strong>{{ $foo->wombat }}<br/>
                                                         <strong>Thud: </strong>{{ $foo->thud }}<br/>
                                                         <strong>Kazaam: </strong>{{ $foo->kazaam }}<br/>
+                                                        <strong>Post Title: </strong>{{ $foo->post->title }}<br/>
 
                                                     </p>
                                                 </div>
